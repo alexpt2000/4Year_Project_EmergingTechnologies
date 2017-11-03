@@ -1,108 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>Alexander Souza - G00317835</title>
-
-	<meta name="description" content="Source code generated using layoutit.com">
-	<meta name="author" content="LayoutIt!">
-
-	<link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
-	<link rel="stylesheet" href="{{url_for('static', filename='canvasStyle.css')}}">
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="{{url_for('static', filename='bootstrap-4.0.0-beta.1.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='canvasStyle.css')}}">
+  <title>Alexander Souza - G00317835</title>
 </head>
 
 <body>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 bg-light">
+          <h1 class="display-1 text-center">Project - TensorFlow</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div align="center">
 
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="jumbotron">
-					<h2>
-						Project 2017
-					</h2>
-					<p>
-						In this project you will create a web application in Python to recognise digits in images. Users will be able to visit the
-						web application through their browser, submit (or draw) an image containing a single digit, and the web application
-						will respond with the digit contained in the image. You should use tensorflow and flask to do this. Note that accuracy
-						of approximately 99% is considered excellent in recognising digits, so it is okay if your algorithm gets it wrong sometimes.
-					</p>
+          <canvas id="canvas" width="280" height="280"></canvas>
 
-				</div>
-			</div>
-		</div>
+  </div>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center">Result</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <a class="btn btn-primary btn-lg btn-block" href="">Send</a>
+          <a class="btn btn-lg btn-block btn-danger" href="">Reset</a>
+        </div>
+        <div class="col-md-6">
 
-		<div class="container">
-			<div class="row">
-				<div class="col-sm">
+            <form role="form" class="form-inline">
 
-					<canvas id="canvas" width="280" height="280"></canvas>
+                        <div class="form-group">
 
-					<form role="form" class="form-inline">
+                            <label for="exampleInputFile">
+                                File input :
+                            </label>
+                            <input type="file" id="exampleInputFile">
 
-						<div class="form-group">
+                        </div>
 
-							<label for="exampleInputFile">
-								File input
-							</label>
-							<input type="file" id="exampleInputFile">
-							<p class="help-block">
-								Submit an image containing a single digit.
-							</p>
-						</div>
+                        <button type="submit" class="btn btn-default">
+                            Submit
+                        </button>
+                    </form>
 
-						<button type="submit" class="btn btn-default">
-							Submit
-						</button>
-					</form>
-					<button type="button" class="btn btn-lg btn-primary btn-block">
-						Compare
-					</button>
-					<button type="button" class="btn btn-danger btn-block">
-						Reset
-					</button>
-				</div>
-				<div class="col-sm">
-					Result
-				</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p class="lead text-center">In this project you will create a web application in Python to recognise digits in images. Users will be able to visit the web application through their browser, submit (or draw) an image containing a single digit, and the web application will respond with the digit contained in the image. You should use tensorflow and flask to do this.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script src="{{url_for('static',filename='jquery-3.2.0.min.js')}}"></script>
+    <script src="{{url_for('static',filename='bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static',filename='canvasIndex.js')}}"></script></body>
 
-			</div>
-		</div>
+  <script type="text/javascript">
 
-	</div>
-
-
-	<script src="{{url_for('static',filename='jquery-3.2.0.min.js')}}"></script>
-	<script src="{{url_for('static',filename='bootstrap.min.js')}}"></script>
-	<script src="{{url_for('static',filename='canvasIndex.js')}}"></script>
-
-	<script type="text/javascript">
-
-	// Ref - https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
-	// Soluctions extrat from github - https://stackoverflow.com/questions/10673122/how-to-save-canvas-as-an-image-with-canvas-todataurl
-		$(".myButton").click(function () {
-			$('#result').text('  Predicting...');
-			var $SCRIPT_ROOT = {
-				{
-					request.script_root | tojson | safe
-				}
-			};
-			var canvasObj = document.getElementById("canvas");
-			var img = canvasObj.toDataURL('image/png');
-			$.ajax({
-				type: "POST",
-				url: $SCRIPT_ROOT + "/predict/",
-				data: img,
-				success: function (data) {
-					$('#result').text('Predicted Output: ' + data);
-				}
-			});
-		});
-	</script>
-</body>
+    // Ref - https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
+    // Soluctions extrat from github - https://stackoverflow.com/questions/10673122/how-to-save-canvas-as-an-image-with-canvas-todataurl
+        $(".myButton").click(function () {
+            $('#result').text('  Predicting...');
+            var $SCRIPT_ROOT = {
+                {
+                    request.script_root | tojson | safe
+                }
+            };
+            var canvasObj = document.getElementById("canvas");
+            var img = canvasObj.toDataURL('image/png');
+            $.ajax({
+                type: "POST",
+                url: $SCRIPT_ROOT + "/predict/",
+                data: img,
+                success: function (data) {
+                    $('#result').text('Predicted Output: ' + data);
+                }
+            });
+        });
+    </script>
 
 </html>
