@@ -21,14 +21,23 @@
   </div>
   <div align="center">
 
-          <canvas id="canvas" width="280" height="280"></canvas>
+    <div>
+        <canvas id="canvas" width="280" height="280"></canvas>
+      
+    </div>
+          
+    <div>
+      <!--  <img src="{{localhost}}static/ImageResult.png" class="img-thumbnail" alt="Draw the firt Image"> -->
+    </div>
+
 
   </div>
   <div class="py-5">
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
-          <h1 class="text-center">Result</h1>
+        <div align="center" class="col-md-12" >
+          <h2>Image Result</h2>
+          <h1 id="result"></h1>
         </div>
       </div>
     </div>
@@ -37,8 +46,9 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          <a class="btn btn-primary btn-lg btn-block" href="">Send</a>
-          <a class="btn btn-lg btn-block btn-danger" href="">Reset</a>
+          <a id="sendImage5" class="btn btn-primary btn-lg btn-block sendImage"  href="javascript: onclick();">Send Image</a>
+          <a class="btn btn-lg btn-block btn-danger" id="clearButton" href="">Reset Image</a>
+
         </div>
         <div class="col-md-6">
 
@@ -79,24 +89,20 @@
 
     // Ref - https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
     // Soluctions extrat from github - https://stackoverflow.com/questions/10673122/how-to-save-canvas-as-an-image-with-canvas-todataurl
-        $(".myButton").click(function () {
-            $('#result').text('  Predicting...');
-            var $SCRIPT_ROOT = {
-                {
-                    request.script_root | tojson | safe
-                }
-            };
-            var canvasObj = document.getElementById("canvas");
-            var img = canvasObj.toDataURL('image/png');
-            $.ajax({
-                type: "POST",
-                url: $SCRIPT_ROOT + "/predict/",
-                data: img,
-                success: function (data) {
-                    $('#result').text('Predicted Output: ' + data);
-                }
-            });
-        });
+    $(".sendImage").click(function(){
+      $('#result').text('Cheking...');
+      var $SCRIPT_ROOT = {{request.script_root|tojson|safe}};
+      var canvasObj = document.getElementById("canvas");
+      var img = canvasObj.toDataURL('image/png');
+      $.ajax({
+        type: "POST",
+        url: $SCRIPT_ROOT + "/ImageResult/",
+        data: img,
+        success: function(data){
+          $('#result').text(data);
+        }
+      });
+    });
     </script>
 
 </html>
