@@ -35,4 +35,5 @@ To start the Flask Server,
 # Install
 
 [Keras](https://anaconda.org/conda-forge/keras)
-$ conda install -c conda-forge keras
+
+```conda install -c conda-forge keras```
