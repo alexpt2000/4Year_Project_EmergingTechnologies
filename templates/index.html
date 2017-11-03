@@ -6,11 +6,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Bootstrap 3, from LayoutIt!</title>
+	<title>Alexander Souza - G00317835</title>
 
 	<meta name="description" content="Source code generated using layoutit.com">
 	<meta name="author" content="LayoutIt!">
-
 
 	<link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{url_for('static', filename='canvasStyle.css')}}">
@@ -33,13 +32,9 @@
 						of approximately 99% is considered excellent in recognising digits, so it is okay if your algorithm gets it wrong sometimes.
 					</p>
 
-
-
 				</div>
 			</div>
 		</div>
-
-
 
 		<div class="container">
 			<div class="row">
@@ -78,8 +73,6 @@
 			</div>
 		</div>
 
-
-
 	</div>
 
 
@@ -88,6 +81,9 @@
 	<script src="{{url_for('static',filename='canvasIndex.js')}}"></script>
 
 	<script type="text/javascript">
+
+	// Ref - https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
+	// Soluctions extrat from github - https://stackoverflow.com/questions/10673122/how-to-save-canvas-as-an-image-with-canvas-todataurl
 		$(".myButton").click(function () {
 			$('#result').text('  Predicting...');
 			var $SCRIPT_ROOT = {
