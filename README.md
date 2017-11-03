@@ -26,7 +26,7 @@ To start the Flask Server,
 
 
 
-# tensorflow - Installing with Anaconda
+# Tensorflow - Installing with Anaconda
 
 ```pip install --upgrade tensorflow```
 
@@ -35,4 +35,4 @@ To start the Flask Server,
 # Install
 
 [Keras](https://anaconda.org/conda-forge/keras)
-```conda install -c conda-forge keras```
+$ conda install -c conda-forge keras
