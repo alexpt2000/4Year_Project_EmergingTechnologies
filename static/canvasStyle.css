@@ -1,0 +1,10 @@
+#canvas {
+	position: relative;
+	color: black;
+	border: 1px solid;
+	margin: auto;
+	margin-top: 5px;
+	border-radius: 5px;
+	cursor: pointer;
+	text-align: center;
+}

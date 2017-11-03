@@ -1,112 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Bootstrap 3, from LayoutIt!</title>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="Source code generated using layoutit.com">
-    <meta name="author" content="LayoutIt!">
+	<title>Bootstrap 3, from LayoutIt!</title>
 
-	
+	<meta name="description" content="Source code generated using layoutit.com">
+	<meta name="author" content="LayoutIt!">
+
+
 	<link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
-	<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+	<link rel="stylesheet" href="{{url_for('static', filename='canvasStyle.css')}}">
 
-  </head>
-  <body>
+</head>
 
-    <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="jumbotron">
-				<h2>
-					Project 2017
-				</h2>
-				<p>
-					In this project you will create a web application in Python to recognise digits in images. Users will be able to visit the web application through their browser, submit (or draw) an image containing a single digit, and the web application will respond with the digit contained in the image. You should use tensorflow and flask to do this. Note that accuracy of approximately 99% is considered excellent in recognising digits, so it is okay if your algorithm gets it wrong sometimes.
-				</p>
-				
+<body>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="jumbotron">
+					<h2>
+						Project 2017
+					</h2>
+					<p>
+						In this project you will create a web application in Python to recognise digits in images. Users will be able to visit the
+						web application through their browser, submit (or draw) an image containing a single digit, and the web application
+						will respond with the digit contained in the image. You should use tensorflow and flask to do this. Note that accuracy
+						of approximately 99% is considered excellent in recognising digits, so it is okay if your algorithm gets it wrong sometimes.
+					</p>
+
+
+
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-4">
-			<h2>
-				Draw
-			</h2>
-			<p>
-				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-			</p>
-
-			<div class="centered">
-				<canvas id="canvas" width="280" height="280"></canvas>
-			</div>
 
 
 
-			<form role="form" class="form-inline">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm">
 
-				<div class="form-group">
-					 
-					<label for="exampleInputFile">
-						File input
-					</label>
-					<input type="file" id="exampleInputFile">
-					<p class="help-block">
-						Submit an image containing a single digit.
-					</p>
+					<canvas id="canvas" width="280" height="280"></canvas>
+
+					<form role="form" class="form-inline">
+
+						<div class="form-group">
+
+							<label for="exampleInputFile">
+								File input
+							</label>
+							<input type="file" id="exampleInputFile">
+							<p class="help-block">
+								Submit an image containing a single digit.
+							</p>
+						</div>
+
+						<button type="submit" class="btn btn-default">
+							Submit
+						</button>
+					</form>
+					<button type="button" class="btn btn-lg btn-primary btn-block">
+						Compare
+					</button>
+					<button type="button" class="btn btn-danger btn-block">
+						Reset
+					</button>
+				</div>
+				<div class="col-sm">
+					Result
 				</div>
 
-				<button type="submit" class="btn btn-default">
-					Submit
-				</button>
-			</form> 
-			<button type="button" class="btn btn-lg btn-primary btn-block">
-				Compare
-			</button> 
-			<button type="button" class="btn btn-danger btn-block">
-				Reset
-			</button>
+			</div>
 		</div>
-		<div class="col-md-4">
-			<h2>
-				Result
-			</h2>
-			<p>
-				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-			</p>
-			<p>
-				<a class="btn" href="#"></a>
-			</p>
-		</div>
-		<div class="col-md-4">
-		</div>
+
+
+
 	</div>
-</div>
 
 
-	<script src="{{url_for('static',filename='jquery.min.js')}}"></script>
+	<script src="{{url_for('static',filename='jquery-3.2.0.min.js')}}"></script>
 	<script src="{{url_for('static',filename='bootstrap.min.js')}}"></script>
-	<script src="{{url_for('static',filename='scripts.js')}}"></script>
-	<script src="{{url_for('static',filename='index.js')}}"></script>
+	<script src="{{url_for('static',filename='canvasIndex.js')}}"></script>
 
-	<script type="text/javascript">   
-		$(".myButton").click(function(){
+	<script type="text/javascript">
+		$(".myButton").click(function () {
 			$('#result').text('  Predicting...');
-			var $SCRIPT_ROOT = {{request.script_root|tojson|safe}};
+			var $SCRIPT_ROOT = {
+				{
+					request.script_root | tojson | safe
+				}
+			};
 			var canvasObj = document.getElementById("canvas");
 			var img = canvasObj.toDataURL('image/png');
 			$.ajax({
 				type: "POST",
 				url: $SCRIPT_ROOT + "/predict/",
 				data: img,
-				success: function(data){
+				success: function (data) {
 					$('#result').text('Predicted Output: ' + data);
 				}
 			});
 		});
-</script>
-  </body>
+	</script>
+</body>
+
 </html>
