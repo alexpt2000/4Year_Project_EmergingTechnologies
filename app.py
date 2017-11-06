@@ -1,14 +1,29 @@
+# Alexander Souza - G00317835
+# 03/11/7017
+
+#http://flask.pocoo.org/
+#Flask is a microframework for Python based on Werkzeug, Jinja 2 and good intentions
 from flask import Flask, render_template, request
+
 import numpy as np
-import keras.models
+
 import re
 import base64
 from scipy.misc import imread, imresize
 import tensorflow as tf
 
+#https://keras.io/
+#https://keras.io/#getting-started-30-seconds-to-keras
+
+#Keras is a high-level neural networks API, written in Python and capable of running on top of TensorFlow, CNTK, or Theano. 
+#It was developed with a focus on enabling fast experimentation. Being able to go from idea to result with the least possible 
+#delay is key to doing good research.
+import keras.models
 from keras.models import Sequential
+from keras.models import load_model
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
+from keras.applications.mobilenet import MobileNet
 
 import sys 
 import os
@@ -16,11 +31,19 @@ import os
 app = Flask(__name__)
 global model, graph
 
+
 def init():
     num_classes = 10
     img_rows, img_cols = 28, 28
     input_shape = (img_rows, img_cols, 1)
+
+
+    #Ref: https://keras.io/getting-started/faq/
+    # Ref: https://keras.io/getting-started/sequential-model-guide/
     model = Sequential()
+
+    # in the first layer, you must specify the expected input data shape:
+    # here, 20-dimensional vectors.
     model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
     model.add(Conv2D(64, (3, 3), activation='relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
@@ -30,20 +53,18 @@ def init():
     model.add(Dropout(0.5))
     model.add(Dense(num_classes, activation='softmax'))
 
-    # load woeights into new model
+
+    # Ref. https://keras.io/getting-started/faq/
+    # load weights from first model; will only affect the first layer, dense_1.
+    #Assuming you have code for instantiating your model, you can then load the weights you saved into a model with the same architecture:
+    #model.load_weights("weights.h5", by_name=True)
     model.load_weights("weights.h5")
 
+    model.compile(loss=keras.losses.categorical_crossentropy, optimizer=keras.optimizers.Adadelta(), metrics=['accuracy'])
 
-    # compile and evaluate loaded model
-    model.compile(loss=keras.losses.categorical_crossentropy, optimizer=keras.optimizers.Adadelta(),
-                  metrics=['accuracy'])
-    #loss, accuracy = model.evaluate(X_test,y_test)
-    #print('loss:', loss)
-    # print('accuracy:', accuracy)
     graph = tf.get_default_graph()
 
     return model, graph
-
 
 
 model, graph = init()
