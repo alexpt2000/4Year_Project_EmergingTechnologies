@@ -12,8 +12,9 @@ import base64
 from scipy.misc import imread, imresize
 import tensorflow as tf
 
-#https://keras.io/
-#https://keras.io/#getting-started-30-seconds-to-keras
+# https://keras.io/
+# https://keras.io/#getting-started-30-seconds-to-keras
+# https://machinelearningmastery.com/handwritten-digit-recognition-using-convolutional-neural-networks-python-keras/
 
 #Keras is a high-level neural networks API, written in Python and capable of running on top of TensorFlow, CNTK, or Theano. 
 #It was developed with a focus on enabling fast experimentation. Being able to go from idea to result with the least possible 
@@ -37,7 +38,6 @@ def init():
     img_rows, img_cols = 28, 28
     input_shape = (img_rows, img_cols, 1)
 
-
     #Ref: https://keras.io/getting-started/faq/
     # Ref: https://keras.io/getting-started/sequential-model-guide/
     model = Sequential()
@@ -53,22 +53,24 @@ def init():
     model.add(Dropout(0.5))
     model.add(Dense(num_classes, activation='softmax'))
 
-
     # Ref. https://keras.io/getting-started/faq/
     # load weights from first model; will only affect the first layer, dense_1.
     #Assuming you have code for instantiating your model, you can then load the weights you saved into a model with the same architecture:
-    #model.load_weights("weights.h5", by_name=True)
-    model.load_weights("weights.h5")
+    
+    # Train File
+    # To generate this file if nescessary, open the folder train and run the file cnn.py
+    model.load_weights("cnn.h5")
 
     model.compile(loss=keras.losses.categorical_crossentropy, optimizer=keras.optimizers.Adadelta(), metrics=['accuracy'])
-
     graph = tf.get_default_graph()
 
     return model, graph
 
 
 model, graph = init()
-    
+
+# Maping the index.html as main page
+# The index is locate into template folder, default folder for Flask    
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -76,28 +78,36 @@ def index():
 @app.route('/ImageResult/', methods=['GET','POST'])
 def predict():
 
+    # Parse the image into the folder before read
     parseImage(request.get_data())
 
-
+    # Read the Image on folder
     x = imread('static/ImageResult.png', mode='L')
+
+    # Converting the image before predict
     x = np.invert(x)
     x = imresize(x,(28,28))
-
-
     x = x.reshape(1,28,28,1)
+
     with graph.as_default():
+        # Predict the image, base on model added
         out = model.predict(x)
-        #print(out)
-        print(np.argmax(out, axis=1))
-        response = np.array_str(np.argmax(out, axis=1))
+
+        # Print the result int screen
+        print(np.argmax(out))
+
+        # Return the result to HTML
+        response = np.array_str(np.argmax(out))
+
         return response 
-    
+
+# Parse Image   
 def parseImage(imgData):
     imgstr = re.search(b'base64,(.*)', imgData).group(1)
     with open('static/ImageResult.png','wb') as output:
         output.write(base64.decodebytes(imgstr))
 
-
+# run the app and assigne the port 1111
 if __name__ == '__main__':
     app.debug = True
     port = int(os.environ.get("PORT", 1111))
