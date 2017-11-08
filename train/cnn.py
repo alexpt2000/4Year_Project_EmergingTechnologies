@@ -5,6 +5,9 @@ Gets to 99.25% test accuracy after 12 epochs
 16 seconds per epoch on a GRID K520 GPU.
 '''
 
+# Soluction from:
+# https://github.com/fchollet/keras/blob/master/examples/mnist_cnn.py
+
 import keras
 from keras.datasets import mnist
 from keras.models import Sequential

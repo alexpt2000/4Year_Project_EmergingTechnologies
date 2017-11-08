@@ -29,6 +29,7 @@ from keras.applications.mobilenet import MobileNet
 import sys 
 import os
 
+
 app = Flask(__name__)
 global model, graph
 
@@ -110,5 +111,6 @@ def parseImage(imgData):
 # run the app and assigne the port 1111
 if __name__ == '__main__':
     app.debug = True
+    #app.run(debug=True)
     port = int(os.environ.get("PORT", 1111))
     app.run(host='0.0.0.0', port=port)
