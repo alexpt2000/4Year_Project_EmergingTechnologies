@@ -4,7 +4,7 @@ Developed using [TensorFlow](https://www.tensorflow.org/) and the super simple [
 
 Wrapped into a Webapp using [Flask](http://flask.pocoo.org/) Micro Framework.
 
-![Screencast](https://github.com/alexpt2000gmit/4Year_Project_EmergingTechnologies/blob/master/Screencast/screencast.gif)
+![Screencast](Screencast/screencast.gif)
 
 
 # Requirements
