@@ -1,3 +1,5 @@
+![Keras](Screencast/keras-tensorflow-logo.jpg)
+
 A simple web application that recognizes handwritten digits. 
 
 Developed using [TensorFlow](https://www.tensorflow.org/) and the super simple [Keras](http://keras.io/) Library. 
