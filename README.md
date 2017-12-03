@@ -60,3 +60,11 @@ Enter a URL in the address bar of your browser,
 ```http://localhost:1111/```
 
 
+## Author
+
+### Alexander Souza
+- G00317835@gmit.ie
+- alexpt2000@gmail.com
+- github.com/alexpt2000gmit
+- github.com/alexpt2000
+- www.linkedin.com/in/alexander-souza-3a841539/
